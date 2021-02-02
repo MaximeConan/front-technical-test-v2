@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+
+.btn-primary {
+  @apply bg-green-500 hover:bg-green-700 transition duration-150 text-white px-5 py-2 rounded-md;
+}
+
+@tailwind utilities;
