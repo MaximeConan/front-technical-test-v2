@@ -4,5 +4,5 @@ export const getTotalCart = (cart) => {
     return acc
   }, 0)
 
-  return totalCart
+  return Number(totalCart.toFixed(2))
 }

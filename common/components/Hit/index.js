@@ -17,7 +17,7 @@ const Hit = ({ cart, totalCart, hit, onAddProduct, onRemoveProduct }) => {
   const _removeProduct = () => {
     onRemoveProduct(hit.objectID)
   }
-  console.log(price, hit.salePrice)
+
   const _onAddProduct = () => {
     onAddProduct({
       name: hit.name,
