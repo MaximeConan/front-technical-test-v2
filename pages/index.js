@@ -8,7 +8,7 @@ import {
   Configure,
   HitsPerPage,
 } from "react-instantsearch-dom"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 
 import CustomHits from "../common/components/CustomHits"
 import Hit from "../common/components/Hit"
@@ -16,7 +16,7 @@ import Header from "../common/components/Header"
 
 import { cartAtom } from "common/state/atoms"
 import { useCallback } from "react"
-import { totalCartPriceSelector } from "common/state/selectors"
+import { cartSelector } from "common/state/selectors"
 
 const searchClient = algoliasearch(
   "latency",
@@ -24,8 +24,8 @@ const searchClient = algoliasearch(
 )
 
 export default function Home() {
-  const [cart, setCart] = useRecoilState(cartAtom)
-  const totalCart = useRecoilValue(totalCartPriceSelector)
+  const setCart = useSetRecoilState(cartAtom)
+  const { cart, totalCart } = useRecoilValue(cartSelector)
 
   const onAddProduct = useCallback((product) => {
     setCart((oldCart) => [...oldCart, product])

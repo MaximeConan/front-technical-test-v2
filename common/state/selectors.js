@@ -1,14 +1,16 @@
 import { selector } from "recoil"
 
 import { cartAtom } from "./atoms"
-import { getTotalCart } from "../utils/cart"
+import { applyPromotion, getTotalCart } from "../utils/cart"
 
-export const totalCartPriceSelector = selector({
-  key: "totalCartPriceSelector",
+export const cartSelector = selector({
+  key: "cartSelector",
   get: ({ get }) => {
     const cart = get(cartAtom)
 
-    const totalPrice = getTotalCart(cart)
-    return totalPrice
+    const totalCart = getTotalCart(cart)
+    const updatedCart = applyPromotion(cart, totalCart)
+    console.log(totalCart, updatedCart)
+    return { cart: updatedCart.cart, totalCart: updatedCart.totalCart }
   },
 })

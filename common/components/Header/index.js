@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { useRecoilValue } from "recoil"
 
-import { totalCartPriceSelector } from "common/state/selectors"
+import { cartSelector } from "common/state/selectors"
 
 const Header = () => {
-  const totalCart = useRecoilValue(totalCartPriceSelector)
+  const { totalCart } = useRecoilValue(cartSelector)
+
   return (
     <header className="bg-gray-100 p-3">
       <nav className="flex justify-between">

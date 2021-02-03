@@ -1,15 +1,15 @@
 import Link from "next/link"
 import { isEmpty } from "lodash"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 
 import Header from "../common/components/Header"
 
 import { cartAtom } from "../common/state/atoms"
-import { totalCartPriceSelector } from "../common/state/selectors"
+import { cartSelector } from "../common/state/selectors"
 
 const Cart = () => {
-  const [cart, setCart] = useRecoilState(cartAtom)
-  const totalCart = useRecoilValue(totalCartPriceSelector)
+  const setCart = useSetRecoilState(cartAtom)
+  const { cart, totalCart } = useRecoilValue(cartSelector)
 
   const onRemoveProduct = (productId) => {
     setCart((oldCart) =>

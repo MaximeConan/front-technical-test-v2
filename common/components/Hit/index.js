@@ -8,11 +8,10 @@ const Hit = ({ cart, totalCart, hit, onAddProduct, onRemoveProduct }) => {
     [cart]
   )
 
-  const hasPromotion = useMemo(() => {
-    return totalCart >= 200 && hit.salePrice > 250
-  }, [totalCart, hit])
-
-  const price = hasPromotion ? hit.salePrice * 0.5 : null
+  const productFromCart = useMemo(() => {
+    const product = cart.find((product) => product.objectID === hit.objectID)
+    return { price: product?.salePrice, hasPromotion: product?.hasPromotion }
+  }, [cart])
 
   const _removeProduct = () => {
     onRemoveProduct(hit.objectID)
@@ -21,7 +20,9 @@ const Hit = ({ cart, totalCart, hit, onAddProduct, onRemoveProduct }) => {
   const _onAddProduct = () => {
     onAddProduct({
       name: hit.name,
-      salePrice: !isNil(price) ? price : hit.salePrice,
+      salePrice: productFromCart.hasPromotion
+        ? productFromCart.price
+        : hit.salePrice,
       objectID: hit.objectID,
     })
   }
@@ -33,8 +34,8 @@ const Hit = ({ cart, totalCart, hit, onAddProduct, onRemoveProduct }) => {
         <p className="mb-5">{hit.name}</p>
         <div className="flex justify-center items-center">
           <p className="mr-4">
-            {!isNil(price)
-              ? `${price}$ instead of ${hit.salePrice}`
+            {productFromCart.hasPromotion
+              ? `${productFromCart.price}$ instead of ${hit.salePrice}`
               : `${hit.salePrice}$`}
           </p>
           {isInCart ? (
