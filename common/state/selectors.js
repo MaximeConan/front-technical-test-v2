@@ -10,7 +10,7 @@ export const cartSelector = selector({
 
     const totalCart = getTotalCart(cart)
     const updatedCart = applyPromotion(cart, totalCart)
-    console.log(totalCart, updatedCart)
+
     return { cart: updatedCart.cart, totalCart: updatedCart.totalCart }
   },
 })
